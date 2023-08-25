@@ -6,7 +6,7 @@ import il.ac.hit.quizzy.interfaces.IQuizQuestionBuilder;
 public class QuizQuestion implements IQuizQuestion {
     public static class Builder implements IQuizQuestionBuilder {
 
-
+        //Testing commit
         @Override
         public IQuizQuestionBuilder setTitle(String text) {
             return null;
