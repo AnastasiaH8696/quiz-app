@@ -20,6 +20,7 @@ public class TerminalQuiz implements IQuiz {
         System.out.println("starting the terminal quiz");
         System.out.println("Quiz: " + getName());
         play();
+        System.out.println("Quiz ended. Your score: " + score);
     }
 
     @Override
@@ -44,6 +45,9 @@ public class TerminalQuiz implements IQuiz {
 
     private void play() {
         for (IQuizQuestion question : questions) {
+            boolean isValidChoose = false;
+            int userAnswer = -1;
+            int answersRange = question.getAnswers().size();
             System.out.println("Question: " + question.getQuestion());
             System.out.println("Answers:");
 
@@ -55,17 +59,20 @@ public class TerminalQuiz implements IQuiz {
 
             Scanner scanner = new Scanner(System.in);
 
-            boolean isValidChoose = false;
-            int userAnswer = -1;
             while (!isValidChoose) {
-                int answersRange = question.getAnswers().size();
                 System.out.print("Enter your answer (1-" + answersRange + "): ");
-                userAnswer = scanner.nextInt();
+                try {
+                    userAnswer = scanner.nextInt();
+                    scanner.nextLine();
 
-                if (userAnswer >= 1 && userAnswer <=answersRange) {
-                    isValidChoose = true;
-                } else {
-                    System.out.println("invalid Input please choose answer from 1 to " + answersRange);
+                    if (userAnswer >= 1 && userAnswer <= answersRange) { // TODO ask Nastia to implement some method with same logic in QuizQuestion
+                        isValidChoose = true;
+                    } else {
+                        System.out.println("Your answer is out of range please choose answer from 1 to " + answersRange);
+                    }
+                } catch (Exception e) {
+                    System.out.println("invalid type answer. Please enter a valid number.");
+                    scanner.nextLine();
                 }
             }
 
@@ -77,7 +84,6 @@ public class TerminalQuiz implements IQuiz {
             }
 
         }
-        System.out.println("Quiz ended. Your score: " + score);
     }
 
     public int getScore() {
