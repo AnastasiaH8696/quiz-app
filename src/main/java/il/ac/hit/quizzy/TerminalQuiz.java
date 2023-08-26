@@ -12,7 +12,7 @@ public class TerminalQuiz implements IQuiz {
     private List<IQuizQuestion> questions = new ArrayList<>();
     private int score;
 
-    private final int POINTS_TO_ADD = 5;
+    private final int POINTS_TO_ADD = 5; // TODO add it to some Utils class...
 
     @Override
     public void start() {
