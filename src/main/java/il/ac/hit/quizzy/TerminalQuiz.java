@@ -1,7 +1,6 @@
 package il.ac.hit.quizzy;
 
 import il.ac.hit.quizzy.interfaces.IQuiz;
-import il.ac.hit.quizzy.interfaces.IQuizAnswer;
 import il.ac.hit.quizzy.interfaces.IQuizQuestion;
 import il.ac.hit.quizzy.utils.QuizConstants;
 
@@ -49,7 +48,7 @@ public class TerminalQuiz implements IQuiz {
             int answersRange = question.getAnswers().size();
             System.out.println("Question: " + question.getQuestion());
             System.out.println("Answers:");
-            question.printAnswers();
+            printAnswers(question);
 
             Scanner scanner = new Scanner(System.in);
 
@@ -106,5 +105,13 @@ public class TerminalQuiz implements IQuiz {
                 ", questions=" + questions +
                 ", score=" + score +
                 '}';
+    }
+
+    private void printAnswers(IQuizQuestion question) {
+        int answerIndex = 1;
+        for (QuizQuestion.Answer answer : question.getAnswers()) {
+            System.out.println(answerIndex + ". " + answer.getText());
+            answerIndex++;
+        }
     }
 }

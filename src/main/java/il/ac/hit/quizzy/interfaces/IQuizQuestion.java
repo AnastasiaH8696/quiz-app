@@ -13,5 +13,4 @@ public interface IQuizQuestion {
     String getTitle();
     boolean isAnswerCorrect(int answerIndex);
     boolean isAnswerIndexCorrect(int answerIndex);
-    void printAnswers();
 }
