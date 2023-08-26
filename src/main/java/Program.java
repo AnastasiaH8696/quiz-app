@@ -26,7 +26,7 @@ public class Program {
         //creating 2nd question
         IQuizQuestionBuilder builder2 = new QuizQuestion.Builder();
         builder2.setTitle("We Love Australia");
-        builder2.setQuestion("Canada starts with… ?");
+        builder2.setQuestion("Australia starts with… ?");
         builder2.addAnswer("Australia starts with the letter ‘A’.",true);
         builder2.addAnswer("Australia starts with the letter ‘B’.",false);
         builder2.addAnswer("Australia starts with the letter ‘C’.",false);

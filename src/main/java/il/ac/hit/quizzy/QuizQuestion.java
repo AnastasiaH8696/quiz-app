@@ -14,7 +14,7 @@ public class QuizQuestion implements IQuizQuestion {
     private List<Answer> answers;
 
     private QuizQuestion() {
-        answers = new ArrayList<>();
+        answers = new ArrayList<Answer>();
     }
 
     @Override
@@ -31,20 +31,35 @@ public class QuizQuestion implements IQuizQuestion {
     public void addAnswer(String text, boolean correct) {
         answers.add(new Answer(text, correct));
     }
+    @Override
     public List<Answer> getAnswers() {
-        return answers;
+        return this.answers;
     }
-
+    @Override
     public String getQuestion() {
-        return question;
+        return this.question;
     }
-
+    @Override
     public String getTitle() {
-        return title;
+        return this.title;
     }
-
+    @Override
     public boolean isAnswerCorrect(int answerIndex) {
         return this.answers.get(answerIndex).correct;
+    }
+
+    @Override
+    public boolean isAnswerIndexCorrect(int answerIndex) {
+        return (answerIndex >= 1 && answerIndex <= this.answers.size());
+    }
+
+    @Override
+    public void printAnswers() {
+        int answerIndex = 1;
+        for (Answer answer : this.answers) {
+            System.out.println(answerIndex + ". " + answer.text);
+            answerIndex++;
+        }
     }
 
     public static class Builder implements IQuizQuestionBuilder {
