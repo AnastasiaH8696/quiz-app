@@ -14,7 +14,7 @@ public class QuizQuestion implements IQuizQuestion {
     private List<Answer> answers;
 
     private QuizQuestion() {
-        answers = new ArrayList<>();
+        answers = new ArrayList<Answer>();
     }
 
     @Override
@@ -31,18 +31,19 @@ public class QuizQuestion implements IQuizQuestion {
     public void addAnswer(String text, boolean correct) {
         answers.add(new Answer(text, correct));
     }
+    @Override
     public List<Answer> getAnswers() {
         return this.answers;
     }
-
+    @Override
     public String getQuestion() {
         return this.question;
     }
-
+    @Override
     public String getTitle() {
         return this.title;
     }
-
+    @Override
     public boolean isAnswerCorrect(int answerIndex) {
         return this.answers.get(answerIndex).correct;
     }
