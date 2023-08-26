@@ -32,19 +32,33 @@ public class QuizQuestion implements IQuizQuestion {
         answers.add(new Answer(text, correct));
     }
     public List<Answer> getAnswers() {
-        return answers;
+        return this.answers;
     }
 
     public String getQuestion() {
-        return question;
+        return this.question;
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public boolean isAnswerCorrect(int answerIndex) {
         return this.answers.get(answerIndex).correct;
+    }
+
+    @Override
+    public boolean isAnswerIndexCorrect(int answerIndex) {
+        return (answerIndex >= 1 && answerIndex <= this.answers.size());
+    }
+
+    @Override
+    public void printAnswers() {
+        int answerIndex = 1;
+        for (Answer answer : this.answers) {
+            System.out.println(answerIndex + ". " + answer.text);
+            answerIndex++;
+        }
     }
 
     public static class Builder implements IQuizQuestionBuilder {
