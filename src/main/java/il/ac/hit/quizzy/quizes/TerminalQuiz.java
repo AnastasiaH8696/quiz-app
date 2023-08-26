@@ -1,5 +1,7 @@
-package il.ac.hit.quizzy;
+package il.ac.hit.quizzy.quizes;
 
+import il.ac.hit.quizzy.QuizQuestion;
+import il.ac.hit.quizzy.enums.QuizType;
 import il.ac.hit.quizzy.interfaces.IQuiz;
 import il.ac.hit.quizzy.interfaces.IQuizQuestion;
 import il.ac.hit.quizzy.utils.QuizConstants;
@@ -8,10 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TerminalQuiz implements IQuiz {
+public class TerminalQuiz extends UIQuiz implements IQuiz {
     private String name;
     private List<IQuizQuestion> questions = new ArrayList<>();
     private int score;
+
+    public TerminalQuiz() {
+        this.quizType = QuizType.TERMINAL;
+    }
 
     @Override
     public void start() {
