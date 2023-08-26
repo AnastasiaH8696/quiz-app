@@ -34,6 +34,14 @@ public class QuizQuestion implements IQuizQuestion {
         return answers;
     }
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
     public boolean isAnswerCorrect(int answerIndex) {
         return this.answers.get(answerIndex).correct;
     }
