@@ -1,5 +1,6 @@
 package il.ac.hit.quizzy;
 
+import il.ac.hit.quizzy.interfaces.IQuizAnswer;
 import il.ac.hit.quizzy.interfaces.IQuizQuestion;
 import il.ac.hit.quizzy.interfaces.IQuizQuestionBuilder;
 
@@ -77,12 +78,32 @@ public class QuizQuestion implements IQuizQuestion {
         }
     }
 
-    private static class Answer {
-        String text;
-        boolean correct;
+    public static class Answer implements IQuizAnswer {
+        private String text;
+        private boolean correct;
 
         Answer(String text, boolean correct) {
             this.text = text;
+            this.correct = correct;
+        }
+
+        @Override
+        public String getText() {
+            return text;
+        }
+
+        @Override
+        public void setText(String text) {
+            this.text = text;
+        }
+
+        @Override
+        public boolean isCorrect() {
+            return correct;
+        }
+
+        @Override
+        public void setCorrect(boolean correct) {
             this.correct = correct;
         }
     }
