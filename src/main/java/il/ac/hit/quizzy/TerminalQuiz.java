@@ -1,6 +1,7 @@
 package il.ac.hit.quizzy;
 
 import il.ac.hit.quizzy.interfaces.IQuiz;
+import il.ac.hit.quizzy.interfaces.IQuizAnswer;
 import il.ac.hit.quizzy.interfaces.IQuizQuestion;
 
 import java.util.ArrayList;
@@ -47,8 +48,8 @@ public class TerminalQuiz implements IQuiz {
             System.out.println("Answers:");
 
             int answerIndex = 1;
-            for (String answer : question.getAnswers()) {
-                System.out.println(answerIndex + ". " + answer);
+            for (IQuizAnswer answer : question.getAnswers()) {
+                System.out.println(answerIndex + ". " + answer.getText());
                 answerIndex++;
             }
 
