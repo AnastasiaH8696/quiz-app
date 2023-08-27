@@ -22,16 +22,21 @@ public class TerminalQuiz extends UIQuiz implements IQuiz {
     @Override
     public void start() {
         System.out.println("starting the terminal quiz");
-        System.out.println("Quiz: " + getName());
         play();
-        System.out.println("Quiz ended. Your score: " + score);
+        endTerminalQuiz();
+    }
+
+    private void endTerminalQuiz() {
+        System.out.println("Quiz ended. Your score: " + getScore() + "/" +
+                QuizConstants.POINTS_TO_ADD * questions.size()
+        );
     }
 
     @Override
     public void setName(String name) {
         if (name.isEmpty()) {
             System.out.println("warning: the quiz name was empty, set default name to : 'DEFAULT QUIZ'");
-            this.name = "DEFAULT QUIZ";
+            this.name = QuizConstants.DEFAULT_QUIZ_NAME;
         } else {
             this.name = name;
         }
@@ -48,6 +53,7 @@ public class TerminalQuiz extends UIQuiz implements IQuiz {
     }
 
     private void play() {
+        System.out.println("Quiz: " + getName());
         for (IQuizQuestion question : questions) {
             boolean isValidChoose = false;
             int userAnswer = -1;

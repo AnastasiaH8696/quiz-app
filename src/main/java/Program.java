@@ -11,7 +11,7 @@ public class Program {
     public static void main(String argos[]) throws QuizException {
         //creating question
         QuizFactory factory = new QuizFactory();
-        IQuiz quiz = factory.createQuiz(QuizType.TERMINAL);
+        IQuiz quiz = factory.createQuiz(QuizType.GUI);
         quiz.setName("Quiz Demo");
         //creating 1st question
         IQuizQuestionBuilder builder1 = new QuizQuestion.Builder();
@@ -32,10 +32,12 @@ public class Program {
         builder2.addAnswer("Australia starts with the letter ‘C’.",false);
         builder2.addAnswer("Australia starts with the letter ‘D’.",false);
         builder2.addAnswer("Australia starts with the letter ‘E’.",false);
+
         IQuizQuestion question2 = builder2.create();
         //adding questions to quiz
         quiz.addQuestion(question1);
         quiz.addQuestion(question2);
+
         //saving quiz to file and read it back
 //        IQuizFilesDAO dao = SimpleCSVQuizFilesDAO.getInstance();
 //        dao.saveToFile(quiz,"quiz1.data");
