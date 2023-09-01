@@ -13,7 +13,7 @@ public class QuizQuestion implements IQuizQuestion {
     private String question;
     private List<Answer> answers;
 
-    private QuizQuestion() {
+    protected QuizQuestion() {
         answers = new ArrayList<>();
     }
 
