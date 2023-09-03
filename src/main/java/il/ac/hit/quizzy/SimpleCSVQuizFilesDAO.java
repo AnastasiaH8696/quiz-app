@@ -18,9 +18,4 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
     public IQuiz loadQuizFromFile(String fileName) throws QuizException {
         return null;
     }
-
-    @Override
-    public void saveToFile(IQuiz quiz, String s) {
-
-    }
 }

@@ -40,7 +40,7 @@ public class Program {
 
         //saving quiz to file and read it back
 //        IQuizFilesDAO dao = SimpleCSVQuizFilesDAO.getInstance();
-//        dao.saveToFile(quiz,"quiz1.data");
+//        dao.saveQuizToFile(quiz,"quiz1.data");
 //        IQuiz loadedQuiz = dao.loadQuizFromFile("quiz1.data");
         quiz.start();
     }
