@@ -106,6 +106,11 @@ public class TerminalQuiz extends UIQuiz implements IQuiz {
         return questions;
     }
 
+    @Override
+    public QuizType getQuizType() {
+        return this.quizType;
+    }
+
     public void setQuestions(List<IQuizQuestion> questions) {
         this.questions = questions;
     }
