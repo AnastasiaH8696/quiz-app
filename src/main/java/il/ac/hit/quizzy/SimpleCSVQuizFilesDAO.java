@@ -54,15 +54,15 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(CSV_SEPARATOR);
-                if (parts.length < 6) {
-                    throw new QuizException("Invalid CSV format. Please make sure you have a title and at least two questions");
+                if (parts.length < 5) {
+                    throw new QuizException("Invalid CSV format. Please make sure you have a title, a question and at least two answers");
                 }
 
                 QuizQuestion.Builder questionBuilder = new QuizQuestion.Builder();
                 questionBuilder.setTitle(parts[0]);
                 questionBuilder.setQuestion(parts[1]);
 
-                for (int i = 2; i < parts.length; i += 4) {
+                for (int i = 2; i < parts.length; i += 2) {
                     String answerText = parts[i];
                     boolean isCorrect = Boolean.parseBoolean(parts[i + 1]);
                     questionBuilder.addAnswer(answerText, isCorrect);
