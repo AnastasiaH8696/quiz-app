@@ -73,6 +73,11 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
         return questions;
     }
 
+    @Override
+    public QuizType getQuizType() {
+        return this.quizType;
+    }
+
     public int getScore() {
         return score;
     }
