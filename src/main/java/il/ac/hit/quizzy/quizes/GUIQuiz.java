@@ -1,3 +1,12 @@
+/**
+ * The GUIQuiz class extends the UIQuiz class and represents a graphical user interface (GUI) quiz.
+ * It includes functionality for starting, playing, and ending the GUI-based quiz, as well as managing the user's score.
+ *
+ * @author
+ *    Anastasia Hamandritov (ID: 321924433)
+ *    Sergey Juchenko (ID: 319365102)
+ *    Shirel Bitan (ID: 209322395)
+ */
 package il.ac.hit.quizzy.quizes;
 
 import il.ac.hit.quizzy.enums.QuizType;
@@ -26,7 +35,10 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
     private JButton checkButton;
     private JLabel scoreLabel;
 
-
+    /**
+     * Constructs a new GUIQuiz instance and sets its quizType to QuizType.GUI.
+     * Initializes the GUI components for displaying questions and answers.
+     */
     public GUIQuiz() {
         this.quizType = QuizType.GUI;
         frame = new JFrame();
@@ -37,6 +49,9 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
         answerPanel = new JPanel();
     }
 
+    /**
+     * Starts the GUI-based quiz by initializing the components and playing the quiz.
+     */
     @Override
     public void start() {
         SwingUtilities.invokeLater(new Runnable() {
@@ -48,6 +63,11 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
         });
     }
 
+    /**
+     * Sets the name of the quiz. If the provided name is empty, it sets the default name.
+     *
+     * @param name The name to set.
+     */
     @Override
     public void setName(String name) {
         if (name.isEmpty()) {
@@ -59,49 +79,84 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
         }
     }
 
+    /**
+     * Gets the name of the quiz.
+     *
+     * @return The quiz name.
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * Adds a question to the GUI-based quiz.
+     *
+     * @param question The question to add.
+     */
     @Override
     public void addQuestion(IQuizQuestion question) {
         questions.add(question);
     }
 
+    /**
+     * Gets the list of questions in the GUI-based quiz.
+     *
+     * @return The list of quiz questions.
+     */
     public List<IQuizQuestion> getQuestions() {
         return questions;
     }
 
+    /**
+     * Gets the type of the quiz.
+     *
+     * @return The quiz type (e.g., TERMINAL or GUI).
+     */
     @Override
     public QuizType getQuizType() {
         return this.quizType;
     }
 
+    /**
+     * Gets the user's score in the GUI-based quiz.
+     *
+     * @return The user's score.
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Sets the user's score. Updates the score only if the provided score is positive.
+     *
+     * @param score The score to set.
+     */
     public void setScore(int score) {
-        // updates the score only if the score is positive
+        // Updates the score only if the score is positive
         if (score > 0) {
             this.score = score;
         }
     }
 
+    /**
+     * Plays the GUI-based quiz by displaying questions and handling user input and scoring.
+     */
     private void play() {
-        // renders the first question
+        // Renders the first question
         showNextQuestion();
     }
 
+    /**
+     * Initializes the GUI components for displaying questions and answers.
+     */
     private void initComponents() {
-
         frame.setLayout(new BorderLayout());
         frame.add(questionLabel, BorderLayout.NORTH);
         frame.add(checkButton, BorderLayout.SOUTH);
         frame.add(answerPanel, BorderLayout.CENTER);
         frame.add(scoreLabel, BorderLayout.EAST);
-        frame.setSize(800,600);
+        frame.setSize(800, 600);
 
         answerPanel.setLayout(new GridLayout(questions.get(currentQuestionIndex).getAnswers().size(), 1));
 
@@ -120,6 +175,9 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
         frame.setVisible(true);
     }
 
+    /**
+     * Displays the next question in the GUI.
+     */
     private void showNextQuestion() {
         if (currentQuestionIndex < questions.size()) {
             scoreLabel.setText("score: " + getScore());
@@ -137,9 +195,13 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
         }
     }
 
+    /**
+     * Renders the answers for the current question in the GUI.
+     *
+     * @param currentQuestion The current quiz question.
+     */
     private void renderAnswers(IQuizQuestion currentQuestion) {
         ButtonGroup buttonGroup = new ButtonGroup();
-
 
         for (IQuizAnswer answer : currentQuestion.getAnswers()) {
             JRadioButton radioButton = new JRadioButton(answer.getText());
@@ -155,6 +217,9 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
         }
     }
 
+    /**
+     * Checks the user's selected answer and updates the score accordingly.
+     */
     private void checkAnswer() {
         if (selectedRadioButton != null) {
             IQuizQuestion question = questions.get(currentQuestionIndex - 1);
@@ -175,11 +240,13 @@ public class GUIQuiz extends UIQuiz implements IQuiz {
         }
     }
 
+    /**
+     * Displays the quiz result to the user and closes the GUI window.
+     */
     private void showResult() {
         JOptionPane.showMessageDialog(frame, "Quiz ended. Your score: " +
-                getScore() + "/" +  QuizConstants.POINTS_TO_ADD * questions.size()
+                getScore() + "/" + QuizConstants.POINTS_TO_ADD * questions.size()
         );
         frame.dispose();
     }
-
 }

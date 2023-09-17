@@ -38,8 +38,8 @@ public class Program {
         quiz.addQuestion(question2);
         //saving quiz to file and read it back
         IQuizFilesDAO dao = SimpleCSVQuizFilesDAO.getInstance();
-        dao.saveQuizToFile(quiz,"quiz1.data");
-        IQuiz loadedQuiz = dao.loadQuizFromFile("quiz1.data");
+        dao.saveQuizToFile(quiz,"quiz1.csv");
+        IQuiz loadedQuiz = dao.loadQuizFromFile("quiz1.csv");
         loadedQuiz.start();
     }
 
