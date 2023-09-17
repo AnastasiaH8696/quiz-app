@@ -1,3 +1,13 @@
+/**
+ * The SimpleCSVQuizFilesDAO class implements the IQuizFilesDAO interface and provides methods
+ * for saving and loading quizzes from CSV files. It allows for the storage and retrieval of
+ * quizzes in a simple CSV format.
+ *
+ * @author
+ *    Anastasia Hamandritov (ID: 321924433)
+ *    Sergey Juchenko (ID: 319365102)
+ *    Shirel Bitan (ID: 209322395)
+ */
 package il.ac.hit.quizzy;
 
 import il.ac.hit.quizzy.enums.QuizType;
@@ -12,18 +22,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
+
+    /**
+     * The CSV_SEPARATOR constant defines the separator used in the CSV file.
+     */
     private static final String CSV_SEPARATOR = ",";
+
+    /**
+     * The quizType variable stores the type of quiz being operated on.
+     */
     private QuizType quizType;
 
-    // Private constructor to enforce using getInstance() method for obtaining an instance.
+    /**
+     * Private constructor to enforce using getInstance() method for obtaining an instance.
+     * Initializes the quizType to QuizType.TERMINAL as the default value.
+     */
     private SimpleCSVQuizFilesDAO() {
-        this.quizType = QuizType.TERMINAL; //Default
+        this.quizType = QuizType.TERMINAL; // Default
     }
 
+    /**
+     * Gets an instance of the SimpleCSVQuizFilesDAO class.
+     *
+     * @return An instance of SimpleCSVQuizFilesDAO.
+     */
     public static IQuizFilesDAO getInstance() {
         return new SimpleCSVQuizFilesDAO();
     }
 
+    /**
+     * Saves a quiz to a CSV file.
+     *
+     * @param quiz     The quiz to be saved.
+     * @param fileName The name of the CSV file to save the quiz to.
+     * @throws QuizException If an error occurs while saving the quiz.
+     */
     @Override
     public void saveQuizToFile(IQuiz quiz, String fileName) throws QuizException {
         this.quizType = quiz.getQuizType();
@@ -46,6 +79,13 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
         }
     }
 
+    /**
+     * Loads a quiz from a CSV file.
+     *
+     * @param fileName The name of the CSV file to load the quiz from.
+     * @return The loaded quiz.
+     * @throws QuizException If an error occurs while loading the quiz.
+     */
     @Override
     public IQuiz loadQuizFromFile(String fileName) throws QuizException {
         List<IQuizQuestion> questions = new ArrayList<>();
@@ -55,7 +95,7 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(CSV_SEPARATOR);
                 if (parts.length < 5) {
-                    throw new QuizException("Invalid CSV format. Please make sure you have a title, a question and at least two answers");
+                    throw new QuizException("Invalid CSV format. Please make sure you have a title, a question, and at least two answers");
                 }
 
                 QuizQuestion.Builder questionBuilder = new QuizQuestion.Builder();
@@ -77,7 +117,7 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
         // Create a new quiz and add the loaded questions.
         QuizFactory factory = new QuizFactory();
         IQuiz quiz = factory.createQuiz(this.quizType);
-        quiz.getQuestions().clear(); //Because we are using store design pattern, we should remove previous cache items
+        quiz.getQuestions().clear(); // Because we are using store design pattern, we should remove previous cache items
         for (IQuizQuestion question : questions) {
             quiz.addQuestion(question);
         }
@@ -85,4 +125,3 @@ public class SimpleCSVQuizFilesDAO implements IQuizFilesDAO {
         return quiz;
     }
 }
-
